@@ -426,7 +426,7 @@ h1.hero-title .accent::after{
       <span class="cta-corner tr"></span>
       <span class="cta-corner bl"></span>
       <span class="cta-corner br"></span>
-      <a class="cta" href="https://t.me/AiFarmPoker" target="_blank" rel="noopener">
+      <a class="cta" id="leadBtn" href="https://t.me/AiFarmPoker" target="_blank" rel="noopener">
         アクセスを取得
         <span class="cta-arrow">→</span>
       </a>
@@ -459,6 +459,21 @@ window.addEventListener('load', ()=>{
   document.querySelectorAll('.reveal').forEach(el=>{
     setTimeout(()=>el.classList.add('in'), 50);
   });
+
+  // Meta Pixel: отправка события Lead при клике на основную кнопку
+  const leadBtn = document.getElementById('leadBtn');
+
+  if (leadBtn) {
+    leadBtn.addEventListener('click', () => {
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+          content_name: 'Telegram CTA',
+          content_category: 'AiFarm Poker',
+          destination: 'https://t.me/AiFarmPoker'
+        });
+      }
+    });
+  }
 });
 </script>
 
